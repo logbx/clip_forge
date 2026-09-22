@@ -31,8 +31,11 @@ jobs:
     - name: Run build
       run: npm run build
 
-    - name: Run tests
-      run: npm test
+    - name: Run unit tests
+      run: npm run test:unit
+
+    - name: Run smoke tests
+      run: npm run test:smoke
 
     - name: Check for TypeScript errors
       run: npx tsc --noEmit

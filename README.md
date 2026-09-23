@@ -150,10 +150,51 @@ To use AI B-roll features (optional):
 
 ## 🧪 Testing
 
+ClipForge uses **Vitest** for unit testing and includes a build smoke test to verify production artifacts.
+
+### Running Tests
+
 ```bash
-# Run smoke test (verifies build)
+# Run all unit tests
 npm test
+
+# Run unit tests in watch mode (for development)
+npm run test:unit:watch
+
+# Run unit tests with UI
+npm run test:unit:ui
+
+# Run smoke test (verifies build artifacts)
+npm run test:smoke
+
+# Run all tests (unit + smoke)
+npm run test:all
 ```
+
+### Test Coverage
+
+Unit tests cover:
+- **`src/renderer/utils/cn.ts`** - className merge utility with Tailwind conflict resolution
+- **`src/renderer/store/historyStore.ts`** - Undo/redo history management with state snapshots
+- **`src/renderer/store/uiStore.ts`** - UI state management (panels, zoom, playback, recording)
+
+All tests run without requiring:
+- Live API keys (OpenAI, SerpAPI)
+- Network access
+- Electron GUI
+- FFmpeg execution
+
+### CI Testing
+
+GitHub Actions CI runs:
+1. Unit tests (`npm run test:unit`) - Pure logic tests
+2. Build (`npm run build`) - Compile TypeScript and Vite
+3. Smoke tests (`npm run test:smoke`) - Verify build artifacts
+4. TypeScript checks (`npx tsc --noEmit`) - Type safety validation
+
+All tests must pass across:
+- **OS**: Ubuntu, macOS, Windows
+- **Node.js**: 18.x, 20.x
 
 ## 🗂️ Project Structure
 
